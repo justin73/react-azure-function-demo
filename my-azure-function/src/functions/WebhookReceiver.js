@@ -1,4 +1,5 @@
 const { app } = require("@azure/functions");
+const { AzureSignalR } = require("@microsoft/signalr");
 
 app.http("WebhookReceiver", {
   methods: ["GET", "POST"],
@@ -8,6 +9,17 @@ app.http("WebhookReceiver", {
 
     const name = request.query.get("name") || (await request.text()) || "world";
 
-    return { body: `Hello, ${name} from Webhook!` };
+    // Send data to connected clients via SignalR
+    const signalRServiceEndpoint = process.env.AzureSignalRConnectionString;
+    const serviceClient = new AzureSignalR(signalRServiceEndpoint);
+
+    try {
+      // Send message to the "notifications" hub
+      await serviceClient.sendToAll("notifications", JSON.stringify(data));
+      context.log("Sent notification via SignalR:", data);
+    } catch (error) {
+      context.log.error("Error sending notification via SignalR:", error);
+    }
+    return { body: `Hello, ${name} from Webhook added signalR!` };
   },
 });
