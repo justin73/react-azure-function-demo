@@ -11,6 +11,7 @@ app.http("WebhookReceiver", {
 
     // Send data to connected clients via SignalR
     const signalRServiceEndpoint = process.env.AzureSignalRConnectionString;
+    console.log("AzureSignalRConnectionString ---->", signalRServiceEndpoint);
     const serviceClient = new AzureSignalR(signalRServiceEndpoint);
 
     try {
