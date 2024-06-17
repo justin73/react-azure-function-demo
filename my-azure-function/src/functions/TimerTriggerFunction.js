@@ -1,8 +1,8 @@
 const { app, output } = require("@azure/functions");
 
 const eventGridOutput = output.eventGrid({
-  topicEndpointUri: "MyEventGridTopicUriSetting",
-  topicKeySetting: "MyEventGridTopicKeySetting",
+  topicEndpointUri: process.env.MyEventGridTopicUriSetting,
+  topicKeySetting: process.env.MyEventGridTopicKeySetting,
 });
 
 app.timer("timerTrigger1", {
