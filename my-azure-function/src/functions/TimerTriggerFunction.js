@@ -6,7 +6,7 @@ const eventGridOutput = output.eventGrid({
 });
 
 app.timer("timerTrigger1", {
-  schedule: "0 */5 * * * *",
+  schedule: "0 */1 * * * *",
   return: eventGridOutput,
   handler: (myTimer, context) => {
     const timeStamp = new Date().toISOString();
