@@ -1,11 +1,11 @@
-const { app, output } = require("@azure/functions");
+const { app } = require("@azure/functions");
 
 const eventGridOutput = output.eventGrid({
   topicEndpointUri: process.env.MyEventGridTopicUriSetting,
   topicKeySetting: process.env.MyEventGridTopicKeySetting,
 });
 
-app.timer("timerTrigger1", {
+app.timer("timerTrigger", {
   schedule: "0 */1 * * * *",
   return: eventGridOutput,
   handler: (myTimer, context) => {
