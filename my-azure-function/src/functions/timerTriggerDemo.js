@@ -16,7 +16,7 @@ app.timer("timerTrigger", {
       dataVersion: "1.0",
       eventType: "event-type",
       data: {
-        name: "Meng Jia",
+        name: "John Henry",
       },
       eventTime: timeStamp,
     };
