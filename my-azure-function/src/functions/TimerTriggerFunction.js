@@ -10,7 +10,7 @@ app.timer("timerTrigger1", {
   return: eventGridOutput,
   handler: (myTimer, context) => {
     const timeStamp = new Date().toISOString();
-    return {
+    const eventPayload = {
       id: "message-id",
       subject: "subject-name",
       dataVersion: "1.0",
@@ -20,5 +20,9 @@ app.timer("timerTrigger1", {
       },
       eventTime: timeStamp,
     };
+
+    context.log("Sending event to Event Grid:", eventPayload);
+
+    return eventPayload;
   },
 });
